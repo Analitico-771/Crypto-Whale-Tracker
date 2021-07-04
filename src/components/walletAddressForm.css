@@ -1,0 +1,39 @@
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: gray;
+  }
+  
+  .fg--search {
+    background: white;
+    position: relative;
+    min-width: 200px;
+    /* width: 300px; */
+  }
+  
+  .fg--search input {
+    width: 100%;
+    padding: 20px 60px 20px 20px;
+    display: block;
+  }
+  
+  .fg--search button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 18px 20px;
+    z-index: 2;
+  }
+  
+  .fg--search input:focus + button .fa-search {
+    color: red;
+  }
+  
