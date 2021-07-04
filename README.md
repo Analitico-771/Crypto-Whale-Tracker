@@ -1,9 +1,9 @@
 1. This app fetches the transaction information of a crypto wallet from the blockchain and displays it on the screen as useful analytical data.  The user is able to save multiple wallets that he/she is tracking and also able to view multiple assets (currencies) held in the wallet.  Future capability will be for the user to create an account to save the wallets being tracked. User identity is protected since there's no KYC requirement and the user is not connecting or otherwise exposing his/her crypto assets on this site, and all that's required for the site to maintain the saved data is a user profile created with email and password.
 
-I used Etherscan API to fetch blockchain data and a price API to fetch the current price at the time of fetch.  I also used a .env.local file to protect addresses/api-keys/and node endpoints.
+    I used Etherscan API to fetch blockchain data and a price API to fetch the current price at the time of fetch.  I also used a .env.local file to protect addresses/api-keys/and node endpoints.
 
-This script showcases ...
-(TBD)
+    This script showcases ...
+    (TBD)
 
 
 2. Layout and user functionality 
