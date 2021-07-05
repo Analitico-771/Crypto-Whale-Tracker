@@ -9,11 +9,13 @@ import {Provider} from 'react-redux';
 import BaseLayout from './components/layout/BaseLayout';
 import reducer from './reducers';
 import Hooks from './components/Hooks';
-import Classes from './components/Classes'
+import Analytics from './components/Analytics';
+import Class from './components/Class';
 import {
   BrowserRouter as Router,
   Route, Switch
 } from 'react-router-dom'
+
 
 const saveToLocalStorage = (reduxGlobalState) => {
   
@@ -56,8 +58,8 @@ ReactDOM.render(
           <BaseLayout>
             <Switch>
               <Route exact path="/" component={App} />
-              <Route path="/hooks" component={Hooks} />
-              <Route path="/class" component={Classes} />
+              <Route path="/class" component={Class} />
+              <Route path="/analytics" component={Analytics} />
             </Switch>
           </BaseLayout>
         </Router>

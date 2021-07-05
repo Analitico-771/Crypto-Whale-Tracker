@@ -19,7 +19,7 @@ const WalletAddressForm = () => {
     e.preventDefault()
     const url1000 = `https://api.etherscan.io/api?module=account&action=txlist&address=${textValue}&startblock=0&endblock=99999999&page=1&offset=1000&sort=des&apikey=${apiKEY}`;
 
-    async function getWalletData() {
+    let getWalletData = async () => {
       try {
         const response = await fetch(url1000); //api call for symbol information
         const walletData = await response.json();
@@ -28,7 +28,6 @@ const WalletAddressForm = () => {
         }
         else {
           // const uuID = {...state, id: uuid() };
-          // console.log(walletData.result); //console.log api object
           dispatch(submit(textValue, walletData));
         }
       }
@@ -42,7 +41,7 @@ const WalletAddressForm = () => {
   return <>
     <div className="form-group fg--search">
       <form onSubmit={handleForm}>
-        <input class="input" onSubmit={handleForm} type="text" value={textValue} placeholder="type an address" onChange={(e)=>setTextValue(e.target.value)} />
+        <input className="input" onSubmit={handleForm} type="text" value={textValue} placeholder="type an address" onChange={(e)=>setTextValue(e.target.value)} />
         <button type="submit"><i className="fa fa-search"></i></button>
       </form>
     </div>

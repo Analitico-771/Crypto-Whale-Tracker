@@ -6,7 +6,7 @@ import { increment } from '../actions/walletActions';
 import { decrement } from '../actions/walletActions';
 import { connect } from 'react-redux';
 
-class classComponent extends Component {
+class analyticsComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,4 +43,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(classComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(analyticsComponent);

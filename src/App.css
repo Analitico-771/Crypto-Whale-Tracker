@@ -93,7 +93,7 @@
 
 .content > div:last-child { /* tile 6 */
   padding-right: 0;
-  width: 20%
+  width: 75%
 }
 
 @media (max-width:992px) {

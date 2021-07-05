@@ -18,10 +18,10 @@ const BaseLayout = (props) => {
                 
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/hooks">Hooks</Link>
+                <Link className="nav-link" to="/class">Class</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/class">Class</Link>
+                <Link className="nav-link" to="/analytics">Analytics</Link>
               </li>
             </ul>
           </div>
