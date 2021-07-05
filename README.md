@@ -46,6 +46,7 @@ This app is a DeFi DApp based on Smart Contract ERC20 Token standards and Ethere
     * https://github.com/AnaIitico
 
 * Resources
+    * https://etherscan.io/apis
     * https://web3js.readthedocs.io/en/v1.3.4/
     * https://javascript.info/async
     * https://reactjs.org/

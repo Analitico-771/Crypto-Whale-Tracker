@@ -34,6 +34,29 @@
   font-weight: bold;
 }
 
+.blockchain-txns {
+  /* d-flex row col-sm-12 text-center */
+  align-content: center;
+  border: 2px solid red;
+}
+
+.blockchain-txns > div {
+  /* d-flex row col-sm-12 text-center */
+  /* text-overflow:clip; */
+  width:25%;
+  height: 30px;
+  align-content: center;
+  overflow:hidden;
+  
+}
+
+.blockchain-txns1 {
+  /* d-flex row col-sm-12 text-center */
+  width:auto;
+  align-content: center;
+  border: 2px solid red;
+}
+
 .content  {
   background-color: #1d1d1d;
   position: absolute;
@@ -51,7 +74,7 @@
 }
 
 .content > div {
-  width: 20%;
+  width: 25%;
   padding-right: 8px
 }
 
@@ -60,22 +83,23 @@
 }
 
 .content > div:nth-child(2) { /* Saved Whale Addresses*/
-  min-width: 200px
+  width: 55%;
+  /* min-width: 200px */
 }
 
 .content  div:nth-child(3) { /* Analytics */
-  width: 40%
+  width: 30%
 }
 
 .content > div:last-child { /* tile 6 */
   padding-right: 0;
-  min-width: 40px
+  width: 20%
 }
 
 @media (max-width:992px) {
   .content {
     display: block;
-    overflow-y: auto
+    overflow-y: auto;
   }
 
   .content > div {
@@ -98,7 +122,9 @@
 }
 
 .vertical-split > div {
-  height: 100%
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden
 }
 
 .vertical-split > div:first-child {
@@ -172,19 +198,5 @@
   border-bottom: 1px solid #007bff;
 }
 
-.card-body .price-chart {
-  height:100%;
-  padding-bottom: 60px;
-}
 
-.card-body .price-chart .price {
-  padding-left: 20px;
-}
 
-td.cancel-order {
-  cursor: pointer;
-}
-
-tr.order-book-order {
-  cursor: pointer;
-}

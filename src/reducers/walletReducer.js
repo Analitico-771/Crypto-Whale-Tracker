@@ -1,5 +1,6 @@
 
 import {SUBMIT} from '../actions/types';
+import {REMOVE} from '../actions/types';
 import {INCREMENT} from '../actions/types';
 import {DECREMENT} from '../actions/types';
 
@@ -19,6 +20,12 @@ const web3 = (state, action) => {
             return {
                 ...state, 
                 walletData: action.data.data.result,
+                address: [...state.address, action.data.address]
+            }
+
+        case REMOVE:
+            return {
+                ...state,
                 address: [...state.address, action.data.address]
             }
 

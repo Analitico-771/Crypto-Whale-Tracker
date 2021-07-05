@@ -1,6 +1,7 @@
 
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import uuid from 'uuid';
 import { submit } from '../actions/walletActions';
 import {apiKEY} from '../keys';
 import './walletAddressForm.css';
@@ -25,8 +26,9 @@ const WalletAddressForm = () => {
         if(walletData.message !== 'OK'){
           alert(`${walletData.message} for address ${textValue}.  Please try another address`)
         }
-        else{
-          console.log(walletData); //console.log api object
+        else {
+          // const uuID = {...state, id: uuid() };
+          // console.log(walletData.result); //console.log api object
           dispatch(submit(textValue, walletData));
         }
       }
