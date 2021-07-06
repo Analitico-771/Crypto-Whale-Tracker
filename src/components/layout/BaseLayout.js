@@ -1,13 +1,15 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from '../logo.png';
+import './logo.css';
 
 const BaseLayout = (props) => {
   return (
     <>
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-          <Link className="navbar-brand" to="/">Crypto Whale Tracker</Link>
+          <Link className="navbar-brand" to="/"> <img className="logo-img" src={logo} alt="" /> </Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>

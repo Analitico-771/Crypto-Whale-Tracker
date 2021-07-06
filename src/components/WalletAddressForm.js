@@ -13,7 +13,7 @@ const WalletAddressForm = () => {
   // const [isValid, setIsValid] = useState(false);
   // const [selectValue, setSelectValue] = useState('Select Token')
   const address = useSelector(state => state.wallet.address);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(address);
 
   const handleForm = (e) => {
     e.preventDefault()

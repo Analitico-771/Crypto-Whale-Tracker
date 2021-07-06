@@ -10,6 +10,7 @@ const web3 = (state, action) => {
         state = {
             counter: 0,
             address: [],
+            lastAddress: "",
             walletData: []
         }
     }
@@ -17,10 +18,21 @@ const web3 = (state, action) => {
     switch(action.type){
 
         case SUBMIT:
-            return {
-                ...state, 
-                walletData: action.data.data.result,
-                address: [...state.address, action.data.address]
+
+            // [].includes(searchCriteria)
+            if(state.address.includes(action.data.address)){
+                return {
+                    ...state,
+                    lastAddress: action.data.address,
+                    walletData: action.data.data.result,
+                } 
+            }else{
+                return {
+                    ...state, 
+                    walletData: action.data.data.result,
+                    lastAddress: action.data.address,
+                    address: [...state.address, action.data.address]
+                    }
             }
 
         case REMOVE:

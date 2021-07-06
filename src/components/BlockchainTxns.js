@@ -6,6 +6,8 @@ import uuid from 'uuid';
 import WalletAddressForm from './WalletAddressForm'
 import {apiKEY} from '../keys';
 import {rpcURL} from '../keys';
+import {convertedDate} from './helpers';
+import {convertedValue} from './helpers';
 
 import { submit } from '../actions/walletActions';
 
@@ -17,6 +19,7 @@ let user = `Anonymous`;
 const BlockchainTxns = () => {
     const [txns, setTxns] = useState([]);
     const address = useSelector(state => state.wallet.address);
+    const lastAddress = useSelector(state => state.wallet.lastAddress);
     const walletData = useSelector(state => state.wallet.walletData);
     
     // console.log('This is walletData')
@@ -24,11 +27,6 @@ const BlockchainTxns = () => {
     const dispatch = useDispatch();
 
     // console.log(address)//Don't forget to delete
-
-    const url100 = `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=100&sort=des&apikey=${apiKEY}`;
-    const ERC20 = `https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&startblock=0&endblock=99999999&page=1&offset=1000&sort=des&apikey=${apiKEY}`;
-    const NFTS = `https://api.etherscan.io/api?module=account&action=tokennfttx&address=${address}&startblock=0&endblock=999999999&page=1&offset=1000&sort=des&apikey=${apiKEY}`;
-
     useEffect(() => {
         //*componentDidUnmount - clean up function
         //   return () => {
@@ -40,35 +38,60 @@ const BlockchainTxns = () => {
 
         // setBlockchainTxns(walletData => walletData)
         })
-        
-    let fetchWalletData = async (input, address) => {
+
+    let fetchWalletData = async (e, input) => {
         try {
-            const response = await fetch(input); //api call for symbol information
+            console.log(e.target.className)
+            // className="Address-Button 0"
+            // Hello there => ["Address-Button", "0"]
+            const classArray = e.target.className.split(" ");
+            // console.log(classArray[classArray.length - 1]);
+            // 0
+            const whaleAddressIndex = classArray[classArray.length - 1];
+            const whaleAddress = address[whaleAddressIndex];
+            let url=""
+            switch(input){
+                case "url100":
+                    url = `https://api.etherscan.io/api?module=account&action=txlist&address=${whaleAddress}&startblock=0&endblock=99999999&page=1&offset=100&sort=des&apikey=${apiKEY}`;
+                break;
+                
+                case "ERC20":
+                    url = `https://api.etherscan.io/api?module=account&action=tokentx&address=${whaleAddress}&startblock=0&endblock=99999999&page=1&offset=1000&sort=des&apikey=${apiKEY}`;
+                break;
+
+                case "NFTS":
+                    url = `https://api.etherscan.io/api?module=account&action=tokennfttx&address=${whaleAddress}&startblock=0&endblock=999999999&page=1&offset=1000&sort=des&apikey=${apiKEY}`;
+                break;
+
+                default:
+                    break;
+            }
+
+            const response = await fetch(url); //api call for symbol information
             const walletData = await response.json();
+            // console.log(walletData);
             if(walletData.message !== 'OK'){
             
-            alert(`${walletData.message} for address ${address}.  Please try again!`)
+            alert(`${walletData.message} for address ${whaleAddress}.  Please try again!`)
             }
             else {
             // console.log(walletData); //console.log api object
-            dispatch(submit(address, walletData));
+            dispatch(submit(whaleAddress, walletData));
             }
         }
         catch(err) {
             alert(err);
         }
     }
+
     // for testing only - getting the actual date from a timestamp
-    // let convertDate = (blockNumber) => {
+    // let convertedDate = (blockNumber) => {
     //     let blockInfo = web3.eth.getBlock(blockNumber, async (error, block) => {
     //         let timestamp = await block.timestamp;
     //         let date = (timestamp * 1000);
     //         date = new Date (date);
     //         // console.log(`Date ${date}`)
-    //         // return <>
-    //         //     {date}
-    //         // </>
-    //         // console.log(`Timestamp ${timestamp}`)
+    //         // return date;
     //     })
     // }
 
@@ -93,15 +116,15 @@ const BlockchainTxns = () => {
               <div className="card-body">
               <div className="address-list"><br />
                   {/* begin mapping whale wallet address list */}
-                  <div className="card-body address-list"> {address.map(addressNumber => {
+                  <div className="card-body address-list"> {address.map((addressNumber, index) => {
                     return <>
                       <div className="address-list">
                         <h6 >{addressNumber}</h6>
                         {/* other api call buttons and delete button */}
-                        <button className="address-buttons" onClick={()=>fetchWalletData(url100, address)}>Txns</button>
-                        <button className="address-buttons" onClick={()=>fetchWalletData(ERC20, address)}>ERC20</button>
-                        <button className="address-buttons" onClick={()=>fetchWalletData(NFTS, address)}>NFTS</button>
-                        <button className="address-delete">Del</button>
+                        <button className={`address-buttons ${index}`} onClick={(e)=>fetchWalletData(e, "url100")}>Txns</button>
+                        <button className={`address-buttons ${index}`} onClick={(e)=>fetchWalletData(e, "ERC20")}>ERC20</button>
+                        <button className={`address-buttons ${index}`} onClick={(e)=>fetchWalletData(e, "NFTS")}>NFTS</button>
+                        <button className={`address-buttons`}>Del</button>
                       </div>
                       <br />
                       </>;
@@ -114,26 +137,26 @@ const BlockchainTxns = () => {
           </div>
           <div className="vertical">
             <div className="card bg-dark text-white">
-                <div className="card-header">Blockchain Txns for address :<span>{<text> {address}</text> }</span>
+                <div className="card-header">Blockchain Transactions for wallet address :<span>{<text> {lastAddress}</text> }</span>
                     <div className="d-flex flex-row blockchain-txns-header">
-                        <div className="flex-fill p-2">test</div>
-                        <div className="flex-fill p-2">test</div>
-                        <div className="flex-fill p-2">test</div>
-                        <div className="flex-fill p-2">test</div>
-                        <div className="flex-fill p-2">test</div>
-                        <div className="flex-fill p-2">test</div>
+                        <div className="flex-fill p-2">Hash</div>
+                        <div className="flex-fill p-2">Block Number</div>
+                        <div className="flex-fill p-2">Time Stamp</div>
+                        <div className="flex-fill p-2">From</div>
+                        <div className="flex-fill p-2">To</div>
+                        <div className="flex-fill p-2">Value</div>
                     </div>
                 </div>
                 {/* begin mapping walletData Blockchain Txns */}
                 <div className="card-body d-flex flex-column"> {walletData.map(walletData => {
                     return <>
                         <div className="d-flex flex-row blockchain-txns">
-                          <div className="flex-fill p-2">{`${walletData.hash}...`}</div>
-                          <div className="flex-fill p-2">{`${walletData.blockNumber}...`}</div>
-                          <div className="flex-fill p-2">{walletData.timestamp}</div>
-                          <div className="flex-fill p-2">{`${walletData.from}...`}</div>
-                          <div className="flex-fill p-2">{`${walletData.to}...`}</div>
-                          <div className="flex-fill p-2">{`${walletData.value}...`}</div>
+                          <div className="flex-fill p-2">{`${walletData.hash}`}</div>
+                          <div className="flex-fill p-2">{`${walletData.blockNumber}`}</div>
+                          <div className="flex-fill p-2">{convertedDate(walletData.timeStamp)}</div>
+                          <div className="flex-fill p-2">{`${walletData.from}`}</div>
+                          <div className="flex-fill p-2">{`${walletData.to}`}</div>
+                          <div className="flex-fill p-2">{`${convertedValue(walletData.value)}`}</div>
                         </div>
                       </>;
                     })}
