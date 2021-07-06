@@ -1,25 +1,44 @@
 
 .address-list {
   font-size: 15px;
+  align-items: center;
+  width: 100%;
+  align-items: center;
 }
+.address-list > h6 {
+  font-size: 13px;
+  /* align-items:flex-end; */
+  width: 100%;
+}
+
 .address-buttons {
+  display:inline;
   font-size: 15px;
   width: 20%;
-  height: 40%;
+  height: 30px;
   border-radius: 5px;
   padding: 5px;
   margin: 2px;
   border-color: dodgerblue;
+  align-items: center;
+  padding: 5px;
+  overflow:hidden;
+  flex-wrap: nowrap;
 }
 
 .address-delete {
+  display: inline;
   font-size: 15px;
   width: 20%;
-  height: 40%;
+  height: 30px;
   border-radius: 5px;
   padding: 5px;
   margin: 2px;
   border-color: dodgerblue;
+  align-items: center;
+  padding: 5px;
+  overflow:hidden;
+  flex-wrap: nowrap;
 }
 
 .address-buttons:hover {
@@ -36,8 +55,15 @@
 
 .blockchain-txns {
   /* d-flex row col-sm-12 text-center */
+  margin-top: 5px;
   align-content: center;
-  border: 2px solid red;
+}
+
+.blockchain-txns-header {
+  /* width:100%; */
+  height: 30px;
+  align-content: center;
+  overflow:hidden;
 }
 
 .blockchain-txns > div {
@@ -47,7 +73,7 @@
   height: 30px;
   align-content: center;
   overflow:hidden;
-  
+  border: 1px dashed whitesmoke;
 }
 
 .blockchain-txns1 {
@@ -79,16 +105,16 @@
 }
 
 .content > div:first-child { /* Welcome */
-  min-width: 220px
+  /* min-width: 220px */
 }
 
 .content > div:nth-child(2) { /* Saved Whale Addresses*/
-  width: 55%;
+  /* width: 55%; */
   /* min-width: 200px */
 }
 
 .content  div:nth-child(3) { /* Analytics */
-  width: 30%
+  /* width: 30% */
 }
 
 .content > div:last-child { /* tile 6 */

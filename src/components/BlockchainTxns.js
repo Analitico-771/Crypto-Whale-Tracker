@@ -14,22 +14,34 @@ const web3 = new Web3(rpcURL);
 
 let user = `Anonymous`;
 
-
 const BlockchainTxns = () => {
-    const [textValue, setTextValue] = useState('');
+    const [txns, setTxns] = useState([]);
     const address = useSelector(state => state.wallet.address);
     const walletData = useSelector(state => state.wallet.walletData);
+    
     // console.log('This is walletData')
     // console.log(walletData)
     const dispatch = useDispatch();
 
-    console.log(address)//Don't forget to delete
+    // console.log(address)//Don't forget to delete
 
-    const url1000 = `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=1000&sort=des&apikey=${apiKEY}`;
+    const url100 = `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=100&sort=des&apikey=${apiKEY}`;
     const ERC20 = `https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&startblock=0&endblock=99999999&page=1&offset=1000&sort=des&apikey=${apiKEY}`;
     const NFTS = `https://api.etherscan.io/api?module=account&action=tokennfttx&address=${address}&startblock=0&endblock=999999999&page=1&offset=1000&sort=des&apikey=${apiKEY}`;
- 
-    let fetchWalletData = async (input, fetchAddress) => {
+
+    useEffect(() => {
+        //*componentDidUnmount - clean up function
+        //   return () => {
+        //     effect
+        //   };
+        console.log(`useEffect`);
+        console.log(walletData);
+        console.log(address);//Don't forget to delete
+
+        // setBlockchainTxns(walletData => walletData)
+        })
+        
+    let fetchWalletData = async (input, address) => {
         try {
             const response = await fetch(input); //api call for symbol information
             const walletData = await response.json();
@@ -38,9 +50,8 @@ const BlockchainTxns = () => {
             alert(`${walletData.message} for address ${address}.  Please try again!`)
             }
             else {
-            console.log(walletData); //console.log api object
+            // console.log(walletData); //console.log api object
             dispatch(submit(address, walletData));
-            BlockchainTxns.refresh()
             }
         }
         catch(err) {
@@ -48,103 +59,91 @@ const BlockchainTxns = () => {
         }
     }
     // for testing only - getting the actual date from a timestamp
-    let convertDate = (blockNumber) => {
-        let blockInfo = web3.eth.getBlock(blockNumber, async (error, block) => {
-            let timestamp = await block.timestamp;
-            let date = (timestamp * 1000);
-            date = new Date (date);
-            console.log(`Date ${date}`)
-            return <>
-                {date}
-            </>
-            // console.log(`Timestamp ${timestamp}`)
-        })
-    }
+    // let convertDate = (blockNumber) => {
+    //     let blockInfo = web3.eth.getBlock(blockNumber, async (error, block) => {
+    //         let timestamp = await block.timestamp;
+    //         let date = (timestamp * 1000);
+    //         date = new Date (date);
+    //         // console.log(`Date ${date}`)
+    //         // return <>
+    //         //     {date}
+    //         // </>
+    //         // console.log(`Timestamp ${timestamp}`)
+    //     })
+    // }
 
     return (
         <>
-          <div>
-            <div className="content">
-              <div className="vertical-split">
-                <div className="card bg-dark text-white">
-                  <div className="card-header">Welcome {`${user}`}</div>
-                  <div className="card-body">
-                    <WalletAddressForm />
-                    <p>
-                      Enter a valid Ethereum wallet. Each wallet you enter is saved below and you can add and delete them as you wish. You can then do other types of searches for the wallets saved.<br /><br />
-                      The initial display is based on a wide search of the blockchain and up-to 1,000 results max.<br /><br />
-                      Invalid entries will not be saved.
-                    </p>
-                  </div>
-                </div>
-                <div className="card bg-dark text-white">
-                  <div className="card-header">Saved Whale Addresses</div>
-                  <div className="card-body">
-                  <div className="address-list"><br />
-                      {/* begin mapping whale wallet address list */}
-                      <p className="card-body address-list"> {address.map(addressObj => {
+    <div>
+        <div className="content">
+          <div className="vertical-split">
+            <div className="card bg-dark text-white">
+              <div className="card-header">Welcome {`${user}`}</div>
+              <div className="card-body">
+                <WalletAddressForm />
+                <p>
+                  Enter a valid Ethereum wallet. Each wallet you enter is saved below and you can add and delete them as you wish. You can then do other types of searches for the wallets saved.<br /><br />
+                  The initial display is based on a wide search of the blockchain and up-to 100 results max.<br /><br />
+                  Invalid entries will not be saved.
+                </p>
+              </div>
+            </div>
+            <div className="card bg-dark text-white">
+              <div className="card-header">Saved Whale Addresses</div>
+              <div className="card-body">
+              <div className="address-list"><br />
+                  {/* begin mapping whale wallet address list */}
+                  <div className="card-body address-list"> {address.map(addressNumber => {
                     return <>
-                      <p className="address-list">
-                      {addressObj}<br />
-                      {/* other api call buttons and delete button */}
-                      <button className="address-buttons" onClick={()=>fetchWalletData(url1000, address)}>Txns</button>
-                      <button className="address-buttons" onClick={()=>fetchWalletData(ERC20, address)}>ERC20</button>
-                      <button className="address-buttons" onClick={()=>fetchWalletData(NFTS, address)}>NFTS</button>
-                      <button className="address-delete">Del</button>
-                      </p>
+                      <div className="address-list">
+                        <h6 >{addressNumber}</h6>
+                        {/* other api call buttons and delete button */}
+                        <button className="address-buttons" onClick={()=>fetchWalletData(url100, address)}>Txns</button>
+                        <button className="address-buttons" onClick={()=>fetchWalletData(ERC20, address)}>ERC20</button>
+                        <button className="address-buttons" onClick={()=>fetchWalletData(NFTS, address)}>NFTS</button>
+                        <button className="address-delete">Del</button>
+                      </div>
                       <br />
                       </>;
                     })} 
-                  </p>
-
-                      {/* end mapping whale wallet address list */}
                   </div>
-                  </div>
-                </div>
+                  {/* end mapping whale wallet address list */}
               </div>
-              <div className="vertical">
-                {/* <div className="card bg-dark text-white">
-                  <div className="card-header">
-                    Analytics
-                  </div>
-                  <div className="card-body">
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  </div>
-                </div> */}
-                <div className="card bg-dark text-white">
-                  <div className="card-header">Blockchain Txns</div>
-                    {/* begin mapping walletData Blockchain Txns */}
-                    <div className="card-body d-flex flex-column"> {walletData.map(walletData => {
-                        return <>
-                            <div className="d-flex flex-row blockchain-txns">
-                              <div className="flex-fill p-2">{`${walletData.hash}...`}</div>
-                              <div className="flex-fill p-2">{`${walletData.blockNumber}...`}</div>
-                              {/* <div className="flex-fill p-2">{walletData.timeStamp === walletData.timeStamp ? (<>{walletData.timeStamp}</>) : null}</div> */}
-
-                              <div className="flex-fill p-2"> date   </div>
-                              {/* code for the web3 query */}
-                              <div className="flex-fill p-2">{`${walletData.from}...`}</div>
-                              <div className="flex-fill p-2">{`${walletData.to}...`}</div>
-                              <div className="flex-fill p-2">{`${walletData.value}...`}</div>
-                            </div>
-                          </>;
-                        })}
-                        {/* end mapping walletData Blockchain Txns */}
-                    </div>
-                </div>
               </div>
-              {/* <div className="vertical">
-                <div className="card bg-dark text-white">
-                  <div className="card-header">
-                    Card Title 6
-                  </div>
-                  <div className="card-body">
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  </div>
-                </div>
-              </div> */}
             </div>
           </div>
+          <div className="vertical">
+            <div className="card bg-dark text-white">
+                <div className="card-header">Blockchain Txns for address :<span>{<text> {address}</text> }</span>
+                    <div className="d-flex flex-row blockchain-txns-header">
+                        <div className="flex-fill p-2">test</div>
+                        <div className="flex-fill p-2">test</div>
+                        <div className="flex-fill p-2">test</div>
+                        <div className="flex-fill p-2">test</div>
+                        <div className="flex-fill p-2">test</div>
+                        <div className="flex-fill p-2">test</div>
+                    </div>
+                </div>
+                {/* begin mapping walletData Blockchain Txns */}
+                <div className="card-body d-flex flex-column"> {walletData.map(walletData => {
+                    return <>
+                        <div className="d-flex flex-row blockchain-txns">
+                          <div className="flex-fill p-2">{`${walletData.hash}...`}</div>
+                          <div className="flex-fill p-2">{`${walletData.blockNumber}...`}</div>
+                          <div className="flex-fill p-2">{walletData.timestamp}</div>
+                          <div className="flex-fill p-2">{`${walletData.from}...`}</div>
+                          <div className="flex-fill p-2">{`${walletData.to}...`}</div>
+                          <div className="flex-fill p-2">{`${walletData.value}...`}</div>
+                        </div>
+                      </>;
+                    })}
+                    {/* end mapping walletData Blockchain Txns */}
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
         </>
     )
 };

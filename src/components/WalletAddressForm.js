@@ -17,11 +17,11 @@ const WalletAddressForm = () => {
 
   const handleForm = (e) => {
     e.preventDefault()
-    const url1000 = `https://api.etherscan.io/api?module=account&action=txlist&address=${textValue}&startblock=0&endblock=99999999&page=1&offset=1000&sort=des&apikey=${apiKEY}`;
+    const url100 = `https://api.etherscan.io/api?module=account&action=txlist&address=${textValue}&startblock=0&endblock=99999999&page=1&offset=100&sort=des&apikey=${apiKEY}`;
 
     let getWalletData = async () => {
       try {
-        const response = await fetch(url1000); //api call for symbol information
+        const response = await fetch(url100); //api call for symbol information
         const walletData = await response.json();
         if(walletData.message !== 'OK'){
           alert(`${walletData.message} for address ${textValue}.  Please try another address`)
