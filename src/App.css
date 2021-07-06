@@ -61,9 +61,25 @@
 
 .blockchain-txns-header {
   /* width:100%; */
+  width:99%;
+  height: 30px;
+  align-content:flex-end;
+  overflow:hidden;
+}
+
+.blockchain-txns-header > div {
+  /* border: 1px dashed whitesmoke; */
+  width:25%;
+}
+
+.blockchain-txns > div {
+  /* d-flex row col-sm-12 text-center */
+  /* text-overflow:clip; */
+  width:25%;
   height: 30px;
   align-content: center;
   overflow:hidden;
+  border: 1px dashed whitesmoke;
 }
 
 .blockchain-txns > div {

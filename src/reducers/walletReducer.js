@@ -36,10 +36,9 @@ const web3 = (state, action) => {
             }
 
         case REMOVE:
-            return {
-                ...state,
-                address: [...state.address, action.data.address]
-            }
+            let arrayCopy = [...state.address];
+            console.log(action)
+            return arrayCopy.filter(address => address === action.address)
 
         case INCREMENT:
             return {

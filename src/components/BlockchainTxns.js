@@ -1,6 +1,7 @@
 
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 import '../App.css';
 import uuid from 'uuid';
 import WalletAddressForm from './WalletAddressForm'
@@ -8,8 +9,10 @@ import {apiKEY} from '../keys';
 import {rpcURL} from '../keys';
 import {convertedDate} from './helpers';
 import {convertedValue} from './helpers';
+import {welcomeText} from './helpers';
 
 import { submit } from '../actions/walletActions';
+import { remove } from '../actions/walletActions';
 
 const Web3 = require('web3');
 const web3 = new Web3(rpcURL);
@@ -21,29 +24,20 @@ const BlockchainTxns = () => {
     const address = useSelector(state => state.wallet.address);
     const lastAddress = useSelector(state => state.wallet.lastAddress);
     const walletData = useSelector(state => state.wallet.walletData);
-    
-    // console.log('This is walletData')
-    // console.log(walletData)
     const dispatch = useDispatch();
-
-    // console.log(address)//Don't forget to delete
+    
     useEffect(() => {
         //*componentDidUnmount - clean up function
         //   return () => {
         //     effect
         //   };
-        console.log(`useEffect`);
-        console.log(walletData);
-        console.log(address);//Don't forget to delete
-
-        // setBlockchainTxns(walletData => walletData)
         })
 
-    let fetchWalletData = async (e, input) => {
+    const fetchWalletData = async (e, input) => {
         try {
-            console.log(e.target.className)
+            // console.log(e.target.className)
             // className="Address-Button 0"
-            // Hello there => ["Address-Button", "0"]
+            //Address-Button ${index} => ["Address-Button", "0"]
             const classArray = e.target.className.split(" ");
             // console.log(classArray[classArray.length - 1]);
             // 0
@@ -95,6 +89,19 @@ const BlockchainTxns = () => {
     //     })
     // }
 
+    const getRemoveWallet = (e, index) => {
+        console.log(e.target.className)
+        // className="Address-Button 0"
+        //Address-Button ${index} => ["Address-Button", "0"]
+        const classArray = e.target.className.split(" ");
+        // console.log(classArray[classArray.length - 1]);
+        // 0
+        const whaleAddressIndex = classArray[classArray.length - 1];
+        const whaleAddress = address[whaleAddressIndex];
+        console.log(whaleAddress);
+        dispatch(remove(whaleAddress));
+    }
+
     return (
         <>
     <div>
@@ -104,11 +111,7 @@ const BlockchainTxns = () => {
               <div className="card-header">Welcome {`${user}`}</div>
               <div className="card-body">
                 <WalletAddressForm />
-                <p>
-                  Enter a valid Ethereum wallet. Each wallet you enter is saved below and you can add and delete them as you wish. You can then do other types of searches for the wallets saved.<br /><br />
-                  The initial display is based on a wide search of the blockchain and up-to 100 results max.<br /><br />
-                  Invalid entries will not be saved.
-                </p>
+                {welcomeText}
               </div>
             </div>
             <div className="card bg-dark text-white">
@@ -116,7 +119,7 @@ const BlockchainTxns = () => {
               <div className="card-body">
               <div className="address-list"><br />
                   {/* begin mapping whale wallet address list */}
-                  <div className="card-body address-list"> {address.map((addressNumber, index) => {
+                  <div className="card-body address-list"> {address && address.map((addressNumber, index) => {
                     return <>
                       <div className="address-list">
                         <h6 >{addressNumber}</h6>
@@ -124,7 +127,7 @@ const BlockchainTxns = () => {
                         <button className={`address-buttons ${index}`} onClick={(e)=>fetchWalletData(e, "url100")}>Txns</button>
                         <button className={`address-buttons ${index}`} onClick={(e)=>fetchWalletData(e, "ERC20")}>ERC20</button>
                         <button className={`address-buttons ${index}`} onClick={(e)=>fetchWalletData(e, "NFTS")}>NFTS</button>
-                        <button className={`address-buttons`}>Del</button>
+                        <button className={`address-buttons ${index}`} onClick={(e)=>getRemoveWallet(e)}>Del</button>
                       </div>
                       <br />
                       </>;
@@ -144,11 +147,11 @@ const BlockchainTxns = () => {
                         <div className="flex-fill p-2">Time Stamp</div>
                         <div className="flex-fill p-2">From</div>
                         <div className="flex-fill p-2">To</div>
-                        <div className="flex-fill p-2">Value</div>
+                        <div className="flex-fill p-2">Value (in ETH)</div>
                     </div>
                 </div>
                 {/* begin mapping walletData Blockchain Txns */}
-                <div className="card-body d-flex flex-column"> {walletData.map(walletData => {
+                <div className="card-body d-flex flex-column"> {walletData && walletData.map(walletData => {
                     return <>
                         <div className="d-flex flex-row blockchain-txns">
                           <div className="flex-fill p-2">{`${walletData.hash}`}</div>
