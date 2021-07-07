@@ -18,7 +18,6 @@ const web3 = (state, action) => {
     switch(action.type){
 
         case SUBMIT:
-
             // [].includes(searchCriteria)
             if(state.address.includes(action.data.address)){
                 return {
