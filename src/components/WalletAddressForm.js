@@ -24,11 +24,13 @@ const WalletAddressForm = () => {
         const response = await fetch(url100); //api call for symbol information
         const walletData = await response.json();
         if(walletData.message !== 'OK'){
-          alert(`${walletData.message} for address ${textValue}.  Please try another address`)
+          alert(`${walletData.message} for address ${textValue}.  Please try another address`);
+          setTextValue("");
         }
         else {
           // const uuID = {...state, id: uuid() };
           dispatch(submit(textValue, walletData));
+          setTextValue("");
         }
       }
       catch(err) {

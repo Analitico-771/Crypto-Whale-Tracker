@@ -10,7 +10,6 @@ import BaseLayout from './components/layout/BaseLayout';
 import reducer from './reducers';
 import Hooks from './components/Hooks';
 import Analytics from './components/Analytics';
-import Class from './components/Class';
 import {
   BrowserRouter as Router,
   Route, Switch
@@ -41,11 +40,11 @@ const loadFromLocalStorage = () => {
 }
 
 const persistedState = loadFromLocalStorage();
-let store = createStore(reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+// let store = createStore(reducer,
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-//   let store = createStore(reducer, persistedState,
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+  let store = createStore(reducer, persistedState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 store.subscribe(()=>{
   saveToLocalStorage(store.getState());
@@ -58,7 +57,6 @@ ReactDOM.render(
           <BaseLayout>
             <Switch>
               <Route exact path="/" component={App} />
-              <Route path="/class" component={Class} />
               <Route path="/analytics" component={Analytics} />
             </Switch>
           </BaseLayout>

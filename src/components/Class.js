@@ -16,7 +16,6 @@ class classComponent extends Component {
     }
     
     render(){
-        let user = `Anonymous`;
 
 
         return (
@@ -26,8 +25,6 @@ class classComponent extends Component {
               <h3>{this.props.walletData}</h3>
               <button onClick={this.props.decrement}>- Global State -</button>
               <button onClick={this.props.increment}>+ Global State +</button>
-
-              
             </>
         )
     }

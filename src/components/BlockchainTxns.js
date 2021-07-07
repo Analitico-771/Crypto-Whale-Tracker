@@ -20,18 +20,17 @@ const web3 = new Web3(rpcURL);
 let user = `Anonymous`;
 
 const BlockchainTxns = () => {
-    const [txns, setTxns] = useState([]);
     const address = useSelector(state => state.wallet.address);
     const lastAddress = useSelector(state => state.wallet.lastAddress);
     const walletData = useSelector(state => state.wallet.walletData);
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         //*componentDidUnmount - clean up function
         //   return () => {
         //     effect
         //   };
-        })
+        })//componenentDidMount
 
     const fetchWalletData = async (e, input) => {
         try {
@@ -65,8 +64,7 @@ const BlockchainTxns = () => {
             const walletData = await response.json();
             // console.log(walletData);
             if(walletData.message !== 'OK'){
-            
-            alert(`${walletData.message} for address ${whaleAddress}.  Please try again!`)
+            alert(`${walletData.message} for address ${whaleAddress}.  Please try again!`);
             }
             else {
             // console.log(walletData); //console.log api object
@@ -90,7 +88,7 @@ const BlockchainTxns = () => {
     // }
 
     const getRemoveWallet = (e, index) => {
-        console.log(e.target.className)
+        // console.log(e.target.className)
         // className="Address-Button 0"
         //Address-Button ${index} => ["Address-Button", "0"]
         const classArray = e.target.className.split(" ");
@@ -98,7 +96,7 @@ const BlockchainTxns = () => {
         // 0
         const whaleAddressIndex = classArray[classArray.length - 1];
         const whaleAddress = address[whaleAddressIndex];
-        console.log(whaleAddress);
+        // console.log(whaleAddress);
         dispatch(remove(whaleAddress));
     }
 
@@ -140,7 +138,7 @@ const BlockchainTxns = () => {
           </div>
           <div className="vertical">
             <div className="card bg-dark text-white">
-                <div className="card-header">Blockchain Transactions for wallet address :<span>{<text> {lastAddress}</text> }</span>
+                <div className="card-header">Blockchain Transactions for wallet address :<span>{<span> {'\u00A0'} {lastAddress}</span> }</span>
                     <div className="d-flex flex-row blockchain-txns-header">
                         <div className="flex-fill p-2">Hash</div>
                         <div className="flex-fill p-2">Block Number</div>
