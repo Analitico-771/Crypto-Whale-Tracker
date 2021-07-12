@@ -13,7 +13,9 @@ export const convertedValue = (value) => {
     if(convertedValue === undefined){
         convertedValue = 0;
     }
-    // console.log(convertedDate);
+    else {
+        convertedValue = convertedValue / 1000000000000000000;
+    }
     return convertedValue;
 }
 
@@ -23,6 +25,9 @@ export const welcomeText =
         The initial display is based on a wide search of the blockchain and up-to 100 results max.<br /><br />
         Invalid or double entries will not be saved.
     </p>
+
+
+    
 
 
   

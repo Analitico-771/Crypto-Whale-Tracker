@@ -57,46 +57,100 @@
   /* d-flex row col-sm-12 text-center */
   margin-top: 5px;
   align-content: center;
+  height: 30px;
+  
+}
+
+.blockchain-txns-hash {
+  width:30%;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  border: 1px dashed whitesmoke;
+}
+
+.blockchain-txns-symbol {
+  width:10%;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  border: 1px dashed whitesmoke;
+}
+
+.blockchain-txns-blocknumber {
+  width:10%;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  border: 1px dashed whitesmoke;
+}
+
+.blockchain-txns-timestamp {
+  width:20%;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  border: 1px dashed whitesmoke;
+}
+
+.blockchain-txns-from {
+  width:30%;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  border: 1px dashed whitesmoke;
+}
+
+.blockchain-txns-to {
+  width:30%;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  border: 1px dashed whitesmoke;
+}
+
+.blockchain-txns-value {
+  width:25%;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  border: 1px dashed whitesmoke;
 }
 
 .blockchain-txns-header {
   /* width:100%; */
   width:99%;
   height: 30px;
-  align-content:flex-end;
+  align-content:flex-start;
   overflow:hidden;
 }
 
-.blockchain-txns-header > div {
+.blockchain-txns-header-hash {
+  width:30%;
   /* border: 1px dashed whitesmoke; */
-  width:25%;
 }
 
-.blockchain-txns > div {
-  /* d-flex row col-sm-12 text-center */
-  /* text-overflow:clip; */
-  width:25%;
-  height: 30px;
-  align-content: center;
-  overflow:hidden;
-  border: 1px dashed whitesmoke;
+.blockchain-txns-header-symbol {
+  width:10%;
+  /* border: 1px dashed whitesmoke; */
 }
 
-.blockchain-txns > div {
-  /* d-flex row col-sm-12 text-center */
-  /* text-overflow:clip; */
-  width:25%;
-  height: 30px;
-  align-content: center;
-  overflow:hidden;
-  border: 1px dashed whitesmoke;
+.blockchain-txns-header-blocknumber {
+  width:10%;
+  /* border: 1px dashed whitesmoke; */
 }
 
-.blockchain-txns1 {
-  /* d-flex row col-sm-12 text-center */
-  width:auto;
-  align-content: center;
-  border: 2px solid red;
+.blockchain-txns-header-timestamp {
+  width:20%;
+  /* border: 1px dashed whitesmoke; */
+}
+
+.blockchain-txns-header-from {
+  width:30%;
+  /* border: 1px dashed whitesmoke; */
+}
+
+.blockchain-txns-header-to {
+  width:30%;
+  /* border: 1px dashed whitesmoke; */
+}
+
+.blockchain-txns-header-value {
+  width:25%;
+  /* border: 1px dashed whitesmoke; */
 }
 
 .content  {
@@ -118,19 +172,6 @@
 .content > div {
   width: 25%;
   padding-right: 8px
-}
-
-.content > div:first-child { /* Welcome */
-  /* min-width: 220px */
-}
-
-.content > div:nth-child(2) { /* Saved Whale Addresses*/
-  /* width: 55%; */
-  /* min-width: 200px */
-}
-
-.content  div:nth-child(3) { /* Analytics */
-  /* width: 30% */
 }
 
 .content > div:last-child { /* tile 6 */
@@ -211,34 +252,3 @@
   position: relative;
   padding: 2px;
 }
-
-.card-body th {
-  border-top: 0;
-}
-
-.card-body .nav-tabs {
-  border-color: #95999c;
-}
-
-.card-body .nav-item.nav-link {
-  font-size: 80%;
-  font-weight: bold;
-  background-color: inherit;
-  color: inherit;
-  padding: 4px 8px;
-  border-top: 0px;
-  border-right: 0px;
-  border-left: 0px;
-  border-color: #95999c;
-  border-radius: 0px;
-}
-
-.card-body .nav-item.nav-link.active {
-  border-top: 0px;
-  border-right: 0px;
-  border-left: 0px;
-  border-bottom: 1px solid #007bff;
-}
-
-
-

@@ -40,11 +40,11 @@ const loadFromLocalStorage = () => {
 }
 
 const persistedState = loadFromLocalStorage();
-// let store = createStore(reducer,
-//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+let store = createStore(reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-  let store = createStore(reducer, persistedState,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+  // let store = createStore(reducer, persistedState,
+  //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 store.subscribe(()=>{
   saveToLocalStorage(store.getState());
@@ -64,4 +64,5 @@ ReactDOM.render(
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
+  
 );

@@ -1,12 +1,10 @@
 
 import React, { Component } from 'react'
-import WalletAddressForm from './WalletAddressForm'
 import { submit } from '../actions/walletActions';
 import { increment } from '../actions/walletActions';
 import { decrement } from '../actions/walletActions';
 import { connect } from 'react-redux';
 import '../App.css';
-
 class classComponent extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +14,6 @@ class classComponent extends Component {
     }
     
     render(){
-
 
         return (
             <>

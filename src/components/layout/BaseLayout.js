@@ -19,7 +19,7 @@ const BaseLayout = (props) => {
                 <Link className="nav-link" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/analytics">Analytics</Link>
+                {/* <Link className="nav-link" to="/analytics">Analytics</Link> */}
               </li>
             </ul>
           </div>

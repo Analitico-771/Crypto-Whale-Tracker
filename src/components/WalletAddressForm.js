@@ -6,8 +6,6 @@ import { submit } from '../actions/walletActions';
 import {apiKEY} from '../keys';
 import './walletAddressForm.css';
 
-
-
 const WalletAddressForm = () => {
   const [textValue, setTextValue] = useState('');
   // const [isValid, setIsValid] = useState(false);
