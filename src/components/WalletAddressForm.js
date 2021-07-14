@@ -6,7 +6,7 @@ import { submit } from '../actions/walletActions';
 //import {apiKEY} from '../keys';//removed for Heroku deployment
 import './walletAddressForm.css';
 
-var apiKEY = '';
+const apiKEY = process.env.REACT_APP_API_KEY;
 
 const WalletAddressForm = () => {
   const [textValue, setTextValue] = useState('');
