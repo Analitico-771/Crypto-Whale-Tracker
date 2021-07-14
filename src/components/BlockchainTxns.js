@@ -5,7 +5,6 @@ import '../App.css';
 import Header from './Header';
 import HeaderERC20 from './HeaderERC20';
 import WalletAddressForm from './WalletAddressForm'
-// import {apiKEY} from '../keys';//removed for Heroku deployment
 // import {rpcURL} from '../keys';
 import {convertedDate} from './helpers';
 import {convertedValue} from './helpers';
@@ -15,15 +14,7 @@ import { submit } from '../actions/walletActions';
 import { remove } from '../actions/walletActions';
 // const Web3 = require('web3');
 // const web3 = new Web3(rpcURL);
-// const AWS = require('aws-sdk'); //for Heroku deployment
-
 const user = `Anonymous`;
-
-// let s3 = new AWS.S3({
-//   accessKeyId: process.env.S3_APIKEY,
-//   secretAccessKey: process.env.S3_SECRET
-// });
-
 const apiKEY = process.env.REACT_APP_API_KEY;
 
 const BlockchainTxns = () => {

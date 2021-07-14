@@ -3,7 +3,6 @@ import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'uuid';
 import { submit } from '../actions/walletActions';
-//import {apiKEY} from '../keys';//removed for Heroku deployment
 import './walletAddressForm.css';
 
 const apiKEY = process.env.REACT_APP_API_KEY;
