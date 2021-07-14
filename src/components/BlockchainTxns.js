@@ -16,7 +16,8 @@ import { remove } from '../actions/walletActions';
 // const Web3 = require('web3');
 // const web3 = new Web3(rpcURL);
 
-let user = `Anonymous`;
+const user = `Anonymous`;
+var apiKEY = '';
 
 const BlockchainTxns = () => {
     const [showERC20, setshowERC20] = useState(false);

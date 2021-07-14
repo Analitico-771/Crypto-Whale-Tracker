@@ -6,6 +6,8 @@ import { submit } from '../actions/walletActions';
 //import {apiKEY} from '../keys';//removed for Heroku deployment
 import './walletAddressForm.css';
 
+var apiKEY = '';
+
 const WalletAddressForm = () => {
   const [textValue, setTextValue] = useState('');
   // const [isValid, setIsValid] = useState(false);
