@@ -5,7 +5,7 @@ import '../App.css';
 import Header from './Header';
 import HeaderERC20 from './HeaderERC20';
 import WalletAddressForm from './WalletAddressForm'
-import {apiKEY} from '../keys';
+// import {apiKEY} from '../keys';//removed for Heroku deployment
 // import {rpcURL} from '../keys';
 import {convertedDate} from './helpers';
 import {convertedValue} from './helpers';
