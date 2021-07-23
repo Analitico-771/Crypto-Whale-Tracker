@@ -1,6 +1,6 @@
 1. This app fetches the transaction information of a crypto wallet from the blockchain and displays it on the screen as useful analytical data.  The user is able to save multiple wallets that he/she is tracking and also able to view multiple assets (currencies) held in the wallet.  Future capability will be for the user to create an account to save the wallets being tracked. User identity is protected since there's no KYC requirement and the user is not connecting or otherwise exposing his/her crypto assets on this site, and all that's required for the site to maintain the saved data is a user profile created with email and password.
 
-    I used Etherscan API to fetch blockchain data and a price API to fetch the current price at the time of fetch.  I also used a .env.local file to protect addresses/api-keys/and node endpoints.
+    I used Etherscan API to fetch blockchain data and a price API to fetch the current price at the time of fetch.  I also used a .env file to protect addresses/api-keys/and node endpoints.
 
 2. M.V.P
     *Provide the following:
@@ -13,7 +13,9 @@
 - I used bootstrap cards
 - The colors used are #007bff, #1d1d1d, and #95999c
 
-* Title Crypto Whale Tracker (with link to live Demo TBD)
+* Title Crypto Whale Tracker
+        Live hosting on Heroku
+    - https://crypto-whale-tracker.herokuapp.com/
 
 * Overview
 This app is a DeFi DApp based on Smart Contract ERC20 Token standards and Ethereum Blockchain. The user can securely connect to the Ehterscan network and fetch data from a wallet he/she wishes to track for analytical purposes and maintain a saved list of wallets they wish to track on a consistent basis.

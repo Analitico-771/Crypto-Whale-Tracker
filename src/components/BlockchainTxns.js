@@ -70,7 +70,7 @@ const BlockchainTxns = () => {
             }
             else {
               // header(input);
-              console.log(walletData); //console.log api object
+              // console.log(walletData); //console.log api object
               dispatch(submit(whaleAddress, walletData));
             }
         }
@@ -78,7 +78,6 @@ const BlockchainTxns = () => {
             alert(err);
         }
     }
-    
     // for testing only - getting the actual date from a timestamp
     // let convertedDate = (blockNumber) => {
     //     let blockInfo = web3.eth.getBlock(blockNumber, async (error, block) => {
@@ -113,7 +112,7 @@ const BlockchainTxns = () => {
                     <WalletAddressForm />
                     {welcomeText}
                   </div>
-                </div>
+                </div>  
                 <div className="card bg-dark text-white">
                   <div className="card-header">Saved Whale Addresses</div>
                   <div className="card-body">
