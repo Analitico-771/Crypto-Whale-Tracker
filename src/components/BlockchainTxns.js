@@ -9,13 +9,15 @@ import WalletAddressForm from './WalletAddressForm'
 import {convertedDate} from './helpers';
 import {convertedValue} from './helpers';
 import {welcomeText} from './helpers';
-
 import { submit } from '../actions/walletActions';
 import { remove } from '../actions/walletActions';
+import { keys } from "../keys";
 // const Web3 = require('web3');
 // const web3 = new Web3(rpcURL);
+// const apiKEY = process.env.REACT_APP_API_KEY;
+
 const user = `Anonymous`;
-const apiKEY = process.env.REACT_APP_API_KEY;
+const apiKEY = keys.apiKEY;
 
 const BlockchainTxns = () => {
     const [showERC20, setshowERC20] = useState(false);
@@ -44,35 +46,41 @@ const BlockchainTxns = () => {
             let url=""
             switch(input){
                 case "url100":
-                    url = `https://api.etherscan.io/api?module=account&action=txlist&address=${whaleAddress}&startblock=0&endblock=99999999&page=1&offset=100&sort=des&apikey=${apiKEY}`;
-                    setshowERC20(false);
+                  url = `https://api.etherscan.io/api?module=account&action=txlist&address=${whaleAddress}&startblock=0&endblock=99999999&page=1&offset=1000&sort=desc&apikey=${apiKEY}`;
+                  setshowERC20(false);
                 break;
                 
                 case "ERC20":
-                    url = `https://api.etherscan.io/api?module=account&action=tokentx&address=${whaleAddress}&startblock=0&endblock=99999999&page=1&offset=1000&sort=des&apikey=${apiKEY}`;
-                    setshowERC20(true);
+                  url = `https://api.etherscan.io/api?module=account&action=tokentx&address=${whaleAddress}&startblock=0&endblock=99999999&page=1&offset=100&sort=desc&apikey=${apiKEY}`;
+                  setshowERC20(true);
                 break;
 
                 case "NFTS":
-                    url = `https://api.etherscan.io/api?module=account&action=tokennfttx&address=${whaleAddress}&startblock=0&endblock=999999999&page=1&offset=1000&sort=des&apikey=${apiKEY}`;
-                    setshowERC20(false);
+                  url = `https://api.etherscan.io/api?module=account&action=tokennfttx&address=${whaleAddress}&startblock=0&endblock=999999999&page=1&offset=100&sort=desc&apikey=${apiKEY}`;
+                  setshowERC20(false);
                 break;
 
                 default:
                   setshowERC20(false);
                 break;
             }
-            const response = await fetch(url); //api call for symbol information
-            const walletData = await response.json();
-            // console.log(walletData);
-            if(walletData.message !== 'OK'){
-            alert(`${walletData.message} for address ${whaleAddress}.  Please try again!`);
+            //Needs try{} catch{}
+            try{
+              const response = await fetch(url); //api call for symbol information
+              const walletData = await response.json();
+              // console.log(walletData);
+              if(walletData.message !== 'OK'){
+              alert(`${walletData.message} for address ${whaleAddress}.  Please try again!`);
+              }
+              else {
+                // header(input);
+                // console.log(walletData); //console.log api object
+                dispatch(submit(whaleAddress, walletData));
+              }
+            }catch(err){
+              alert(`Error with fetching data. Please try again. ${err}`)
             }
-            else {
-              // header(input);
-              // console.log(walletData); //console.log api object
-              dispatch(submit(whaleAddress, walletData));
-            }
+            
         }
         catch(err) {
             alert(err);
