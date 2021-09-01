@@ -5,19 +5,16 @@ import '../App.css';
 import Header from './Header';
 import HeaderERC20 from './HeaderERC20';
 import WalletAddressForm from './WalletAddressForm'
-// import {rpcURL} from '../keys';
 import {convertedDate} from './helpers';
 import {convertedValue} from './helpers';
 import {welcomeText} from './helpers';
 import { submit } from '../actions/walletActions';
 import { remove } from '../actions/walletActions';
-import { keys } from "../keys";
+// import {rpcURL} from '../keys';
 // const Web3 = require('web3');
 // const web3 = new Web3(rpcURL);
-// const apiKEY = process.env.REACT_APP_API_KEY;
 
 const user = `Anonymous`;
-const apiKEY = keys.apiKEY;
 
 const BlockchainTxns = () => {
     const [showERC20, setshowERC20] = useState(false);
@@ -45,18 +42,18 @@ const BlockchainTxns = () => {
             const whaleAddress = address[whaleAddressIndex];
             let url=""
             switch(input){
-                case "url100":
-                  url = `https://api.etherscan.io/api?module=account&action=txlist&address=${whaleAddress}&startblock=0&endblock=99999999&page=1&offset=1000&sort=desc&apikey=${apiKEY}`;
+                case "url1000":
+                  url = `https://api.etherscan.io/api?module=account&action=txlist&address=${whaleAddress}&startblock=0&endblock=99999999&page=1&offset=1000&sort=desc&apikey=${process.env.REACT_APP_API_KEY}`;
                   setshowERC20(false);
                 break;
                 
                 case "ERC20":
-                  url = `https://api.etherscan.io/api?module=account&action=tokentx&address=${whaleAddress}&startblock=0&endblock=99999999&page=1&offset=100&sort=desc&apikey=${apiKEY}`;
+                  url = `https://api.etherscan.io/api?module=account&action=tokentx&address=${whaleAddress}&startblock=0&endblock=99999999&page=1&offset=1000&sort=desc&apikey=${process.env.REACT_APP_API_KEY}`;
                   setshowERC20(true);
                 break;
 
                 case "NFTS":
-                  url = `https://api.etherscan.io/api?module=account&action=tokennfttx&address=${whaleAddress}&startblock=0&endblock=999999999&page=1&offset=100&sort=desc&apikey=${apiKEY}`;
+                  url = `https://api.etherscan.io/api?module=account&action=tokennfttx&address=${whaleAddress}&startblock=0&endblock=999999999&page=1&offset=100&sort=desc&apikey=${process.env.REACT_APP_API_KEY}`;
                   setshowERC20(false);
                 break;
 
@@ -131,7 +128,7 @@ const BlockchainTxns = () => {
                           <div className="address-list">
                             <h6 >{addressNumber}</h6>
                             {/* other api call buttons and delete button */}
-                            <button className={`address-buttons ${index}`} onClick={(e)=>fetchWalletData(e, "url100")}>Txns</button>
+                            <button className={`address-buttons ${index}`} onClick={(e)=>fetchWalletData(e, "url1000")}>Txns</button>
                             <button className={`address-buttons ${index}`} onClick={(e)=>fetchWalletData(e, "ERC20")}>ERC20</button>
                             <button className={`address-buttons ${index}`} onClick={(e)=>fetchWalletData(e, "NFTS")}>NFTS</button>
                             <button className={`address-buttons ${index}`} onClick={(e)=>getRemoveWallet(e)}>Del</button>

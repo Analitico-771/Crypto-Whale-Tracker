@@ -1,15 +1,10 @@
 
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { submit } from '../actions/walletActions';
-import { keys } from "../keys";
+// eslint-disable-next-line no-unused-vars
 import uuid from 'uuid';
 import './walletAddressForm.css';
-
-// const apiKEY = process.env.REACT_APP_API_KEY;
-const apiKEY = keys.apiKEY;
-
-console.log(apiKEY);
 
 const WalletAddressForm = () => {
   const [textValue, setTextValue] = useState('');
@@ -20,11 +15,11 @@ const WalletAddressForm = () => {
 
   const handleForm = (e) => {
     e.preventDefault()
-    const url100 = `https://api.etherscan.io/api?module=account&action=txlist&address=${textValue}&startblock=0&endblock=99999999&page=1&offset=1000&sort=desc&apikey=${apiKEY}`;
+    const url1000 = `https://api.etherscan.io/api?module=account&action=txlist&address=${textValue}&startblock=0&endblock=99999999&page=1&offset=1000&sort=desc&apikey=${process.env.REACT_APP_API_KEY}`;
 
     let getWalletData = async () => {
       try {
-        const response = await fetch(url100); //api call for symbol information
+        const response = await fetch(url1000); //api call for symbol information
         const walletData = await response.json();
         if(walletData.message !== 'OK'){
           alert(`${walletData.message} for address ${textValue}.  Please try another address`);
