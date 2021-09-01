@@ -22,7 +22,7 @@ export const convertedValue = (value) => {
 export const welcomeText = 
     <p>
         Enter a valid Ethereum wallet. Each wallet you enter is saved below and you can add and delete them as you wish. You can then do other types of searches for the wallets saved.<br /><br />
-        The initial display is based on a wide search of the blockchain and up-to 100 results max.<br /><br />
+        The initial display is based on a wide search of the blockchain and up-to 1000 results max.<br /><br />
         Invalid or double entries will not be saved.
     </p>
 
