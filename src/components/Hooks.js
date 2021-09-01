@@ -10,6 +10,7 @@ const Hooks = () => {
     const count = useSelector(state => state.wallet.counter);
 
     //local state 
+    // eslint-disable-next-line no-unused-vars
     const [title, setTitle] = useState("Redux Template")
 
     //receive dispatch function 

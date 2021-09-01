@@ -8,6 +8,7 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import BaseLayout from './components/layout/BaseLayout';
 import reducer from './reducers';
+// eslint-disable-next-line no-unused-vars
 import Hooks from './components/Hooks';
 import Analytics from './components/Analytics';
 import {
