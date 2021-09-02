@@ -18,14 +18,14 @@ const web3 = (state, action) => {
     switch(action.type){
 
         case SUBMIT:
-            // [].includes(searchCriteria)
             if(state.address.includes(action.data.address)){
                 return {
                     ...state,
                     lastAddress: action.data.address,
                     walletData: action.data.data.result,
-                } 
-            }else{
+                }
+            }
+            else{
                 return {
                     ...state, 
                     walletData: action.data.data.result,
@@ -39,11 +39,21 @@ const web3 = (state, action) => {
             // console.log(action)
             let newArray = arrayCopy.filter(address => address !== action.address)
             // console.log(newArray)
-            return {
-                ...state,
-                address: newArray
+            if(action.address === state.lastAddress){
+                return {
+                    ...state,
+                    address: newArray,
+                    walletData: [],
+                    lastAddress: ""
+                }
             }
-
+            else{
+                return {
+                    ...state,
+                    address: newArray,
+                }
+            }
+            
         case INCREMENT:
             return {
                 ...state, 
