@@ -1,4 +1,10 @@
 
+.logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+}
+
 .address-list {
   font-size: 15px;
   align-items: center;

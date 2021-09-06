@@ -2,14 +2,15 @@
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import '../App.css';
+import { submit } from '../actions/walletActions';
+import { remove } from '../actions/walletActions';
 import Header from './Header';
 import HeaderERC20 from './HeaderERC20';
 import WalletAddressForm from './WalletAddressForm'
 import {convertedDate} from './helpers';
 import {convertedValue} from './helpers';
 import {welcomeText} from './helpers';
-import { submit } from '../actions/walletActions';
-import { remove } from '../actions/walletActions';
+// import {findLogo} from './helpers'
 // import {rpcURL} from '../keys';
 // const Web3 = require('web3');
 // const web3 = new Web3(rpcURL);
@@ -28,7 +29,7 @@ const BlockchainTxns = () => {
         //   return () => {
         //     effect
         //   };
-        })//componenentDidMount
+    },[showERC20]);//componenentDidMount
 
     const fetchWalletData = async (e, input) => {
         try {
@@ -65,13 +66,13 @@ const BlockchainTxns = () => {
             try{
               const response = await fetch(url); //api call for symbol information
               const walletData = await response.json();
-              // console.log(walletData);
               if(walletData.message !== 'OK'){
-              alert(`${walletData.message} for address ${whaleAddress}.  Please try again!`);
+                alert(`${walletData.message} for address ${whaleAddress}.  Please try again!`);
               }
               else {
                 // header(input);
                 // console.log(walletData); //console.log api object
+                console.log(walletData);
                 dispatch(submit(whaleAddress, walletData));
               }
             }catch(err){
@@ -106,6 +107,38 @@ const BlockchainTxns = () => {
         // console.log(whaleAddress);
         dispatch(remove(whaleAddress));
     }
+    
+    // function importAll(r) {
+      
+    //   var images = [];
+    //   r.keys().map((item, index) => { images[item.replace('./', '')] = r(item)//.toString().toLowerCase()
+    //   })
+    //   return images;
+    // }
+    
+    // const logos = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
+
+    // console.log("logos ", logos[`eth.png`])
+
+    // const findLogo = (symbol) => {
+    //   let file = `${symbol.toLowerCase()}.png`;
+      
+    //   // console.log(file);
+    //   console.log(`file present`);
+    //   return <img className="logo" src={logos[`eth.png`]} alt="" />      
+    //   // return <img className="logo" src={require(file)} alt="" />      
+      
+    // };
+
+    const findLogo = (symbol) => {
+      let file = `../images/${symbol.toLowerCase()}.png`;
+      if(file){
+        console.log(`file present`);
+        // return <img className="logo" src={file} alt="" />      
+        return <img className="logo" src={require(file).default} alt="" />      
+      };
+    };
+
     return (
         <>
           <div>
@@ -152,7 +185,11 @@ const BlockchainTxns = () => {
                         return <>
                             <div className="d-flex flex-row blockchain-txns">
                               <div className="flex-fill p-2 blockchain-txns-hash">{`${walletData.hash}`}</div>
-                              {showERC20 ? <div className="flex-fill p-2 blockchain-txns-symbol">{walletData.tokenSymbol && walletData.tokenSymbol}</div> : null}
+                              {showERC20 ? <div className="flex-fill p-2 blockchain-txns-symbol" >  {walletData.tokenSymbol && walletData.tokenSymbol} </div> : null}
+                              {/* {showERC20 ? <div className="flex-fill p-2 blockchain-txns-symbol" > {findLogo(walletData.tokenSymbol)} </div> : null} */}
+                              {/* {walletData.tokenSymbol && walletData.tokenSymbol} */}
+                              {/* {findLogo(walletData.tokenSymbol)} */}
+                              {/* require(`../images/bat.png`) */}
                               <div className="flex-fill p-2 blockchain-txns-blocknumber">{`${walletData.blockNumber}`}</div>
                               <div className="flex-fill p-2 blockchain-txns-timestamp">{convertedDate(walletData.timeStamp)}</div>
                               <div className="flex-fill p-2 blockchain-txns-from">{`${walletData.from}`}</div>
