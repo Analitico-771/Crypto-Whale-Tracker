@@ -6,6 +6,8 @@ import { submit } from '../actions/walletActions';
 import { remove } from '../actions/walletActions';
 import Header from './Header';
 import HeaderERC20 from './HeaderERC20';
+import Analytics from './Analytics'
+import Transactions from './Transactions'
 import WalletAddressForm from './WalletAddressForm'
 import {convertedDate} from './helpers';
 import {convertedValue} from './helpers';
@@ -19,6 +21,7 @@ const user = `Anonymous`;
 
 const BlockchainTxns = () => {
     const [showERC20, setshowERC20] = useState(false);
+    const [showAnalytics, setAnalytics] = useState(false);
     const address = useSelector(state => state.wallet.address);
     const lastAddress = useSelector(state => state.wallet.lastAddress);
     const walletData = useSelector(state => state.wallet.walletData);
@@ -50,7 +53,7 @@ const BlockchainTxns = () => {
                 
                 case "ERC20":
                   url = `https://api.etherscan.io/api?module=account&action=tokentx&address=${whaleAddress}&startblock=0&endblock=99999999&page=1&offset=1000&sort=desc&apikey=${process.env.REACT_APP_API_KEY}`;
-                  setshowERC20(true);
+                  if(!showAnalytics) setshowERC20(true);
                 break;
 
                 case "NFTS":
@@ -177,10 +180,15 @@ const BlockchainTxns = () => {
               </div>
               <div className="vertical">
                 <div className="card bg-dark text-white">
-                    <div className="card-header">Blockchain Transactions for wallet address :<span>{<span> {'\u00A0'} {lastAddress}</span> }</span> 
-                    {showERC20 ? <HeaderERC20 /> : <Header />}
+
+                {/* { showAnalytics ? <Analytics /> : <Transactions /> } */}
+
+
+                    <div className="card-header">Data for wallet address :<span> {<span> {'\u00A0'} {lastAddress}</span> } </span> 
+                    { showAnalytics ? null : (showERC20 ? <HeaderERC20 /> : <Header />) }
                     </div>
                     {/* begin mapping walletData Blockchain Txns */}
+                    { showAnalytics ? <Analytics /> : null}
                     <div className="card-body d-flex flex-column"> {walletData && walletData.map(walletData => {
                         return <>
                             <div className="d-flex flex-row blockchain-txns">
