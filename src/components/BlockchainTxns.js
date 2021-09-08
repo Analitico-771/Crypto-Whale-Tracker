@@ -44,7 +44,7 @@ const BlockchainTxns = () => {
             // 0
             const whaleAddressIndex = classArray[classArray.length - 1];
             const whaleAddress = address[whaleAddressIndex];
-            let url=""
+            let url="";
             switch(input){
                 case "url1000":
                   url = `https://api.etherscan.io/api?module=account&action=txlist&address=${whaleAddress}&startblock=0&endblock=99999999&page=1&offset=1000&sort=desc&apikey=${process.env.REACT_APP_API_KEY}`;
@@ -64,7 +64,7 @@ const BlockchainTxns = () => {
                 default:
                   setshowERC20(false);
                 break;
-            }
+            };
             //Needs try{} catch{}
             try{
               const response = await fetch(url); //api call for symbol information
@@ -74,19 +74,20 @@ const BlockchainTxns = () => {
               }
               else {
                 // header(input);
-                // console.log(walletData); //console.log api object
-                console.log(walletData);
+                // console.log(walletData.result.hash); //console.log api object
+                // if(input === "ERC20") console.log(`line 78 `, walletData.result[0].tokenSymbol);
+                // if(input === "ERC20") console.log(`line 78 `, walletData.result.hash);
                 dispatch(submit(whaleAddress, walletData));
-              }
+              };
             }catch(err){
               alert(`Error with fetching data. Please try again. ${err}`)
-            }
+            };
             
         }
         catch(err) {
             alert(err);
-        }
-    }
+        };
+    };
     // for testing only - getting the actual date from a timestamp
     // let convertedDate = (blockNumber) => {
     //     let blockInfo = web3.eth.getBlock(blockNumber, async (error, block) => {
@@ -109,7 +110,7 @@ const BlockchainTxns = () => {
         const whaleAddress = address[whaleAddressIndex];
         // console.log(whaleAddress);
         dispatch(remove(whaleAddress));
-    }
+    };
     
     // function importAll(r) {
       
@@ -134,11 +135,24 @@ const BlockchainTxns = () => {
     // };
 
     const findLogo = (symbol) => {
-      let file = `../images/${symbol.toLowerCase()}.png`;
-      if(file){
+      // console.log(walletData.result.tokenSymbol);
+      // console.log(symbol);
+      symbol = symbol.toLowerCase();
+      let file = require(`./assets/images/${symbol}.png`).default;
+      // console.log(file);
+      if(!file){
+        console.log(`file not present`);
+      }
+      else{
         console.log(`file present`);
-        // return <img className="logo" src={file} alt="" />      
-        return <img className="logo" src={require(file).default} alt="" />      
+        // return file;
+        console.log(`break 1`);
+        // file = require(file)?.default;
+        // console.log(`break 2`);
+        return file;
+        // return require(file).default;
+        // return <img className="logo" src={file} alt="" />
+        // return <img className="logo" src={require(file)} alt="" />
       };
     };
 
@@ -151,7 +165,7 @@ const BlockchainTxns = () => {
                   <div className="card-header">Welcome {`${user}`}</div>
                   <div className="card-body">
                     <WalletAddressForm />
-                    {welcomeText}
+                    { welcomeText }
                   </div>
                 </div>  
                 <div className="card bg-dark text-white">
@@ -193,8 +207,9 @@ const BlockchainTxns = () => {
                         return <>
                             <div className="d-flex flex-row blockchain-txns">
                               <div className="flex-fill p-2 blockchain-txns-hash">{`${walletData.hash}`}</div>
-                              {showERC20 ? <div className="flex-fill p-2 blockchain-txns-symbol" >  {walletData.tokenSymbol && walletData.tokenSymbol} </div> : null}
-                              {/* {showERC20 ? <div className="flex-fill p-2 blockchain-txns-symbol" > {findLogo(walletData.tokenSymbol)} </div> : null} */}
+                              {/* {showERC20 ? <div className="flex-fill p-2 blockchain-txns-symbol" >  {walletData.tokenSymbol && walletData.tokenSymbol} </div> : null} */}
+                              {showERC20 && walletData.tokenSymbol ? <div className="flex-fill p-2 blockchain-txns-symbol" > <img className="logo" src={findLogo(walletData.tokenSymbol)} alt="" /> </div> : null}
+                              {/* {showERC20  && walletData.tokenSymbol ? <div className="flex-fill p-2 blockchain-txns-symbol" > {findLogo(walletData.tokenSymbol)} </div> : null} */}
                               {/* {walletData.tokenSymbol && walletData.tokenSymbol} */}
                               {/* {findLogo(walletData.tokenSymbol)} */}
                               {/* require(`../images/bat.png`) */}

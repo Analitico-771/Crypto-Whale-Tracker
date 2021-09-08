@@ -1,19 +1,21 @@
 
-import fs from 'fs';
+import React from "react";
 
-export const findLogo = (symbol) => {
+// import fs from 'fs';
+
+// export const findLogo = (symbol) => {
         
-        let file = `./images/${symbol}.png`;
-        if(fs.existsSync(file)){
-                console.log(`file present`);
-                // logo = removeLastCharacter(file);
-                // console.log(logo);
-                // return logo
-                file = `images/${symbol}.png`;
-                return file
+//         let file = `./images/${symbol}.png`;
+//         if(fs.existsSync(file)){
+//                 console.log(`file present`);
+//                 // logo = removeLastCharacter(file);
+//                 // console.log(logo);
+//                 // return logo
+//                 file = `images/${symbol}.png`;
+//                 return file
                 
-        };
-};
+//         };
+// };
 
 export const convertedDate = (date) => {
     // console.log(date)
