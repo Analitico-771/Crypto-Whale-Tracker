@@ -15,7 +15,7 @@
 
 * Title Crypto Whale Tracker
         Live hosting on Heroku
-    - https://crypto-whale-tracker.herokuapp.com/
+    - https://crypto-whale-tracker.netlify.app/
 
 * Overview
 This app is a DeFi DApp based on Smart Contract ERC20 Token standards and Ethereum Blockchain. The user can securely connect to the Ehterscan network and fetch data from a wallet he/she wishes to track for analytical purposes and maintain a saved list of wallets they wish to track on a consistent basis.
