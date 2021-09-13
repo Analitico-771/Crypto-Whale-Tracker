@@ -6,6 +6,10 @@
   body {
     background: gray;
   }
+
+  .search {
+    color: red;
+  }
   
   .fg--search {
     background: white;

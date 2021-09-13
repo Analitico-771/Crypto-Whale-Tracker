@@ -1,6 +1,7 @@
 
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { Col, Container, Row } from "react-bootstrap";
 import '../App.css';
 import { submit } from '../actions/walletActions';
 import { remove } from '../actions/walletActions';
@@ -74,6 +75,8 @@ const BlockchainTxns = () => {
               }
               else {
                 // header(input);
+                console.log(walletData.result);
+                // if(input === "ERC20") console.log(walletData.result);
                 // console.log(walletData.result.hash); //console.log api object
                 // if(input === "ERC20") console.log(`line 78 `, walletData.result[0].tokenSymbol);
                 // if(input === "ERC20") console.log(`line 78 `, walletData.result.hash);
@@ -111,49 +114,27 @@ const BlockchainTxns = () => {
         // console.log(whaleAddress);
         dispatch(remove(whaleAddress));
     };
-    
-    // function importAll(r) {
-      
-    //   var images = [];
-    //   r.keys().map((item, index) => { images[item.replace('./', '')] = r(item)//.toString().toLowerCase()
-    //   })
-    //   return images;
-    // }
-    
-    // const logos = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
-
-    // console.log("logos ", logos[`eth.png`])
-
-    // const findLogo = (symbol) => {
-    //   let file = `${symbol.toLowerCase()}.png`;
-      
-    //   // console.log(file);
-    //   console.log(`file present`);
-    //   return <img className="logo" src={logos[`eth.png`]} alt="" />      
-    //   // return <img className="logo" src={require(file)} alt="" />      
-      
-    // };
 
     const findLogo = (symbol) => {
-      // console.log(walletData.result.tokenSymbol);
-      // console.log(symbol);
       symbol = symbol.toLowerCase();
-      let file = require(`./assets/images/${symbol}.png`).default;
-      // console.log(file);
-      if(!file){
+      // if(!require(`./assets/images/${symbol}.png`).default) {
+      //   //sdfdsf
+      // }
+      try{
+        let file = require(`./assets/images/${symbol}.png`).default;
+        if(!file) {
         console.log(`file not present`);
+        file = require(`./assets/images/ghostbusters.png`).default;
+        return file
       }
-      else{
+      else {
         console.log(`file present`);
-        // return file;
-        console.log(`break 1`);
-        // file = require(file)?.default;
-        // console.log(`break 2`);
         return file;
-        // return require(file).default;
-        // return <img className="logo" src={file} alt="" />
-        // return <img className="logo" src={require(file)} alt="" />
       };
+      }catch(err) {
+        return require(`./assets/images/ghostbusters.png`).default;
+      }
+      
     };
 
     return (
@@ -173,7 +154,7 @@ const BlockchainTxns = () => {
                   <div className="card-body">
                   <div className="address-list"><br />
                       {/* begin mapping whale wallet address list */}
-                      <div className="card-body address-list"> {address && address.map((addressNumber, index) => {
+                      <div className="card-body"> {address && address.map((addressNumber, index) => {
                         return <>
                           <div className="address-list">
                             <h6 >{addressNumber}</h6>
@@ -198,31 +179,31 @@ const BlockchainTxns = () => {
                 {/* { showAnalytics ? <Analytics /> : <Transactions /> } */}
 
 
-                    <div className="card-header">Data for wallet address :<span> {<span> {'\u00A0'} {lastAddress}</span> } </span> 
+                    <Container className="card-header">Data for wallet address :<span> {<span> {'\u00A0'} {lastAddress}</span> } </span> 
                     { showAnalytics ? null : (showERC20 ? <HeaderERC20 /> : <Header />) }
-                    </div>
+                    </Container>
                     {/* begin mapping walletData Blockchain Txns */}
                     { showAnalytics ? <Analytics /> : null}
-                    <div className="card-body d-flex flex-column"> {walletData && walletData.map(walletData => {
+                    <Container className="card-body"> {walletData && walletData.map(walletData => {
                         return <>
-                            <div className="d-flex flex-row blockchain-txns">
-                              <div className="flex-fill p-2 blockchain-txns-hash">{`${walletData.hash}`}</div>
-                              {/* {showERC20 ? <div className="flex-fill p-2 blockchain-txns-symbol" >  {walletData.tokenSymbol && walletData.tokenSymbol} </div> : null} */}
-                              {showERC20 && walletData.tokenSymbol ? <div className="flex-fill p-2 blockchain-txns-symbol" > <img className="logo" src={findLogo(walletData.tokenSymbol)} alt="" /> </div> : null}
+                            <Row className="blockchain-txns">
+                              <Col className="blockchain-txns-hash">{`${walletData.hash}`}</Col>
+                              {/* {showERC20 ? <div className="flex-fill p-2 blockchain-txns-symbol" > {walletData.tokenSymbol && walletData.tokenSymbol} </div> : null} */}
+                              {showERC20 && walletData.tokenSymbol ? <Col className=" blockchain-txns-symbol" > <img className="logo" src={findLogo(walletData.tokenSymbol)} alt="" /> {walletData.tokenSymbol && walletData.tokenSymbol} </Col> : null}
                               {/* {showERC20  && walletData.tokenSymbol ? <div className="flex-fill p-2 blockchain-txns-symbol" > {findLogo(walletData.tokenSymbol)} </div> : null} */}
                               {/* {walletData.tokenSymbol && walletData.tokenSymbol} */}
                               {/* {findLogo(walletData.tokenSymbol)} */}
                               {/* require(`../images/bat.png`) */}
-                              <div className="flex-fill p-2 blockchain-txns-blocknumber">{`${walletData.blockNumber}`}</div>
-                              <div className="flex-fill p-2 blockchain-txns-timestamp">{convertedDate(walletData.timeStamp)}</div>
-                              <div className="flex-fill p-2 blockchain-txns-from">{`${walletData.from}`}</div>
-                              <div className="flex-fill p-2 blockchain-txns-to">{`${walletData.to}`}</div>
-                              <div className="flex-fill p-2 blockchain-txns-value">{`${convertedValue(walletData.value)}`}</div>
-                            </div>
+                              <Col className="blockchain-txns-blocknumber">{`${walletData.blockNumber}`}</Col>
+                              <Col className="blockchain-txns-timestamp">{convertedDate(walletData.timeStamp)}</Col>
+                              <Col className="blockchain-txns-from">{`${walletData.from}`}</Col>
+                              <Col className="blockchain-txns-to">{`${walletData.to}`}</Col>
+                              <Col className="blockchain-txns-value">{`${convertedValue(walletData.value)}`}</Col>
+                            </Row>
                           </>;
                         })}
                         {/* end mapping walletData Blockchain Txns */}
-                    </div>
+                    </Container>
                 </div>
               </div>
             </div>

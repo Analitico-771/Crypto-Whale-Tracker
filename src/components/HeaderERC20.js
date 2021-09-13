@@ -1,17 +1,18 @@
 
 import React from 'react';
+import { Col, Row } from 'react-bootstrap';
 
 function HeaderERC20() {
   const headerERC20 = 
-  <div className="d-flex flex-row blockchain-txns-header">
-  <div className="flex-fill p-2 blockchain-txns-header-hash">Hash</div>
-  <div className="flex-fill p-2 blockchain-txns-header-symbol">Symbol</div>
-  <div className="flex-fill p-2 blockchain-txns-header-blocknumber">Block Number</div>
-  <div className="flex-fill p-2 blockchain-txns-header-timestamp" blockchain-txns-header>Time Stamp</div>
-  <div className="flex-fill p-2 blockchain-txns-header-from" >From</div>
-  <div className="flex-fill p-2 blockchain-txns-header-to">To</div>
-  <div className="flex-fill p-2 blockchain-txns-header-value">Symbol Value</div>
-</div>
+  <Row className="blockchain-txns-header">
+    <Col className="blockchain-txns-header-hash">Hash</Col>
+    <Col className="blockchain-txns-header-symbol">Symbol</Col>
+    <Col className="blockchain-txns-header-blocknumber">Block Number</Col>
+    <Col className="blockchain-txns-header-timestamp" blockchain-txns-header>Time Stamp</Col>
+    <Col className="blockchain-txns-header-from" >From</Col>
+    <Col className="blockchain-txns-header-to">To</Col>
+    <Col className="blockchain-txns-header-value">Symbol Value</Col>
+  </Row>
 
   return <>
     {headerERC20}
