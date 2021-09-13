@@ -8,7 +8,7 @@ import { remove } from '../actions/walletActions';
 import Header from './Header';
 import HeaderERC20 from './HeaderERC20';
 import Analytics from './Analytics'
-import Transactions from './Transactions'
+// import Transactions from './Transactions'
 import WalletAddressForm from './WalletAddressForm'
 import {convertedDate} from './helpers';
 import {convertedValue} from './helpers';
