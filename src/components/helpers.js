@@ -20,9 +20,11 @@ import React from "react";
 export const convertedDate = (date) => {
     // console.log(date)
     date = (date * 1000);
-    let convertedDate = new Date (date);
+    // let convertedDate = new Date(date);
+    let convertedDate = new Date(date).toLocaleString().split(',')[0];
+    // let convertedDate = new Date(date).toUTCString();
     // console.log(convertedDate);
-    return convertedDate.toString();
+    return convertedDate;
 }
 
 export const convertedValue = (value) => {
