@@ -2,7 +2,7 @@
 import React, {useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { submit } from '../actions/walletActions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // eslint-disable-next-line no-unused-vars
 import uuid from 'uuid';
 import './walletAddressForm.css';
@@ -43,8 +43,8 @@ const WalletAddressForm = () => {
     <div className="form-group fg--search">
       <form onSubmit={handleForm}>
         <input className="input" onSubmit={handleForm} type="text" value={textValue} placeholder="type an address" onChange={(e)=>setTextValue(e.target.value)} />
-        <button type="submit"> <FontAwesomeIcon icon="coffee" className="search"/> </button>
-        {/* <button type="submit"><i className="fas fa-search"></i></button> */}
+        {/* <button type="submit"> <FontAwesomeIcon icon="coffee" className="search"/> </button> */}
+        <button type="submit"><i className="fas fa-search"></i></button>
       </form>
     </div>
   </>;
