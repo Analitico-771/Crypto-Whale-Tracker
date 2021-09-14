@@ -19,6 +19,7 @@ const Transactions = (props) => {
             <div className="flex-fill p-2 blockchain-txns-to">{`${walletData.to}`}</div>
             <div className="flex-fill p-2 blockchain-txns-value">{`${convertedValue(walletData.value)}`}</div> */}
           </div>
+      // eslint-disable-next-line no-lone-blocks
       {/* end mapping walletData Blockchain Txns */}
 }
 

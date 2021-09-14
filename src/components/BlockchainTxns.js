@@ -22,6 +22,7 @@ const user = `Anonymous`;
 
 const BlockchainTxns = () => {
     const [showERC20, setshowERC20] = useState(false);
+    // eslint-disable-next-line
     const [showAnalytics, setAnalytics] = useState(false);
     const address = useSelector(state => state.wallet.address);
     const lastAddress = useSelector(state => state.wallet.lastAddress);
@@ -177,7 +178,6 @@ const BlockchainTxns = () => {
                 <div className="card bg-dark text-white">
 
                 {/* { showAnalytics ? <Analytics /> : <Transactions /> } */}
-
 
                     <Container className="card-header">Data for wallet address :<span> {<span> {'\u00A0'} {lastAddress}</span> } </span> 
                     { showAnalytics ? null : (showERC20 ? <HeaderERC20 /> : <Header />) }

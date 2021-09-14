@@ -2,7 +2,6 @@
 import React, {useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { submit } from '../actions/walletActions';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // eslint-disable-next-line no-unused-vars
 import uuid from 'uuid';
 import './walletAddressForm.css';
