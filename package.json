@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "engines": {
     "node": "14.x",
-    "npm": "7.x"
+    "npm": "6.x"
   },
   "private": true,
   "dependencies": {
@@ -12,7 +12,6 @@
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^4.6.0",
     "fs": "^0.0.1-security",
-    "npm": "^7.23.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-bootstrap-icons": "^1.5.0",
