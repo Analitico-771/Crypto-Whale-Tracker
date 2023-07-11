@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -14,6 +13,8 @@ import {
   BrowserRouter as Router,
   Route, Switch
 } from 'react-router-dom'
+
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 const saveToLocalStorage = (reduxGlobalState) => {
@@ -41,12 +42,8 @@ const loadFromLocalStorage = () => {
 
 const persistedState = loadFromLocalStorage();
 
-// let store = createStore(reducer,
-//   window.__REDUX_DEVTOOLS_EXTENSION__() && window.__REDUX_DEVTOOLS_EXTENSION__());
-let store = createStore(reducer, persistedState, composeWithDevTools());
 
-//let store = createStore(reducer, persistedState,
-//  window.__REDUX_DEVTOOLS_EXTENSION__() && window.__REDUX_DEVTOOLS_EXTENSION__());
+let store = createStore(reducer, persistedState, composeWithDevTools());
 
 store.subscribe(()=>{
   saveToLocalStorage(store.getState());
